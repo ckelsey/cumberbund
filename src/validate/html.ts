@@ -1,7 +1,13 @@
 import Try from '../try'
 import FromEntities from '../conversion/from-entities'
-import ValidationResult from './validation-result'
 import SelectAll from '../dom/select-all'
+
+export interface ValidationResult {
+    original: string | number
+    valid: boolean
+    sanitized: string | number,
+    reason: string[]
+}
 
 export default function ValidateHtml(
     str: string,

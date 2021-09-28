@@ -102,5 +102,4 @@ export * from "./types/is-non-collection";
 export * from "./types/is-object";
 export * from "./types/type";
 export * from "./validate/html";
-export * from "./validate/validation-result";
 //# sourceMappingURL=index.js.map
