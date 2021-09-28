@@ -73,6 +73,7 @@ export * from "./dom/textarea-height"
 export * from "./dom/walk-up"
 export * from "./dom/was-clicked-on"
 export * from "./dom/web-components/field-utils/slot-element"
+export * from "./dom/web-components/component"
 
 export * from "./function-helpers/partial"
 export * from "./function-helpers/pipe"
@@ -99,7 +100,6 @@ export * from "./routing/get-route-by-path"
 export * from "./routing/link-click-observer"
 export * from "./routing/parse-url"
 export * from "./routing/query-object-to-string"
-export * from "./routing/route-object"
 export * from "./routing/routing"
 export * from "./routing/update-history"
 
@@ -119,6 +119,3 @@ export * from "./types/type"
 
 export * from "./validate/html"
 export * from "./validate/validation-result"
-
-export * from "./dom/web-components/component"
-export * from "./dom/web-components/test-component/test-component"

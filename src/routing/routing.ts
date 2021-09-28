@@ -1,13 +1,40 @@
 import getQuery from './get-query'
 import GetRouteByPath from './get-route-by-path'
 import Observer, { ObserverInstance } from '../observe/observer'
-import { RouteObject, RouteQuery, RouteState, RoutingResult } from './route-object'
 import Get from '../objects/get'
 import LinkClickObserver from './link-click-observer'
 import Diff from '../objects/diff'
 import UpdateHistory from './update-history'
 import EventObserver from '../observe/event-observer'
 import Pipe from '../function-helpers/pipe'
+import { CreateOptions } from '../dom/create'
+import { SubscribeFn } from '../observe/observer'
+
+export interface RouteObject {
+    path: string
+    title: string
+    content?: { [key: string]: CreateOptions[] }
+    allowedQueries?: string[]
+    redirect?: string
+}
+
+export interface RouteState extends RouteObject {
+    base: string
+    query: RouteQuery
+}
+
+export interface RouteQuery {
+    [key: string]: string
+}
+
+export interface RoutingResult {
+    routes: { [key: string]: RouteObject }
+    query: RouteQuery
+    current: RouteState
+    lastState: RouteState
+    subscribeToRoute: typeof SubscribeFn
+    subscribeToQuery: typeof SubscribeFn
+}
 
 function getBaseUrl() {
     return `${location.protocol}//${location.host}`

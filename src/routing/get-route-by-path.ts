@@ -1,5 +1,5 @@
 import parseUrl from './parse-url'
-import { RouteObject } from './route-object'
+import { RouteObject } from './routing'
 
 export default function GetRouteByPath(routes: { [key: string]: RouteObject }) {
     return function getRouteByPathInner(path: string = ''): RouteObject | undefined {
