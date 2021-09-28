@@ -23,6 +23,12 @@ const TestComponent = CreateComponent({
                 }
             }
         }
+    },
+    properties: {
+        sayHi: {
+            value: function () { console.log('this', this) },
+            enumerable: true
+        }
     }
 })
 

@@ -1,7 +1,7 @@
 import Observer, { ObserverInstance } from '../../observe/observer'
 
 export interface ComponentState {
-    initialValue: any
+    initialValue?: any
     matchType?: boolean
     isAttribute?: boolean
     formatter?: (value: any, observerInstance?: ObserverInstance) => any
@@ -43,7 +43,6 @@ function initialValue(host: any, key: string, state: ComponentState) {
 }
 
 export default function CreateComponent(config: ComponentConfig): any {
-    console.log('Create', config)
     const stateKeys = Object.keys(config.state || {})
     const observedAttributes = stateKeys.filter(key => config.state && !!config.state[key].isAttribute)
     const template = getTemplate(config.template, config.style)
@@ -95,6 +94,14 @@ export default function CreateComponent(config: ComponentConfig): any {
                     }
                 })
             }
+
+            const propertyKeys = Object.keys(config.properties || {})
+
+            if (propertyKeys.length) {
+                propertyKeys.forEach(key => {
+                    Object.defineProperty(this, key, config.properties[key])
+                })
+            }
         }
 
         state: { [key: string]: ObserverInstance } = {}
@@ -116,15 +123,7 @@ export default function CreateComponent(config: ComponentConfig): any {
         }
     }
 
-    const propertyKeys = Object.keys(config.properties || {})
-    console.log('propertyKeys', propertyKeys)
 
-    if (propertyKeys.length) {
-        propertyKeys.forEach(key => {
-            console.log('define', key, config.properties[key])
-            Object.defineProperty(ComponentClass, key, config.properties[key])
-        })
-    }
 
     registerComponent(config.selector, ComponentClass)
 

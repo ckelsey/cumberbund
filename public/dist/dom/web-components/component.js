@@ -16,7 +16,6 @@ function initialValue(host, key, state) {
     return state.initialValue;
 }
 export default function CreateComponent(config) {
-    console.log('Create', config);
     const stateKeys = Object.keys(config.state || {});
     const observedAttributes = stateKeys.filter(key => config.state && !!config.state[key].isAttribute);
     const template = getTemplate(config.template, config.style);
@@ -60,6 +59,12 @@ export default function CreateComponent(config) {
                     }
                 });
             }
+            const propertyKeys = Object.keys(config.properties || {});
+            if (propertyKeys.length) {
+                propertyKeys.forEach(key => {
+                    Object.defineProperty(this, key, config.properties[key]);
+                });
+            }
         }
         state = {};
         attributeChangedCallback(attrName, _oldValue, newValue) {
@@ -80,14 +85,6 @@ export default function CreateComponent(config) {
                 config.disconnectedCallback.call(this);
             }
         }
-    }
-    const propertyKeys = Object.keys(config.properties || {});
-    console.log('propertyKeys', propertyKeys);
-    if (propertyKeys.length) {
-        propertyKeys.forEach(key => {
-            console.log('define', key, config.properties[key]);
-            Object.defineProperty(ComponentClass, key, config.properties[key]);
-        });
     }
     registerComponent(config.selector, ComponentClass);
     return ComponentClass;
