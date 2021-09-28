@@ -16,10 +16,11 @@ function initialValue(host, key, state) {
     return state.initialValue;
 }
 export default function CreateComponent(config) {
+    console.log('Create', config);
     const stateKeys = Object.keys(config.state || {});
     const observedAttributes = stateKeys.filter(key => config.state && !!config.state[key].isAttribute);
     const template = getTemplate(config.template, config.style);
-    class Component extends HTMLElement {
+    class ComponentClass extends HTMLElement {
         static get observedAttributes() { return observedAttributes; }
         constructor() {
             super();
@@ -80,7 +81,15 @@ export default function CreateComponent(config) {
             }
         }
     }
-    registerComponent(config.selector, Component);
-    return Component;
+    const propertyKeys = Object.keys(config.properties || {});
+    console.log('propertyKeys', propertyKeys);
+    if (propertyKeys.length) {
+        propertyKeys.forEach(key => {
+            console.log('define', key, config.properties[key]);
+            Object.defineProperty(ComponentClass, key, config.properties[key]);
+        });
+    }
+    registerComponent(config.selector, ComponentClass);
+    return ComponentClass;
 }
 //# sourceMappingURL=component.js.map

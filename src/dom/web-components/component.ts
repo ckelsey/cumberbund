@@ -10,6 +10,8 @@ export interface ComponentState {
 
 export type ComponentStateObject = { [key: string]: ComponentState }
 
+export type PropertiesObject = { [key: string]: PropertyDescriptor & ThisType<any> }
+
 export interface ComponentConfig {
     selector: string
     template: string
@@ -17,6 +19,7 @@ export interface ComponentConfig {
     state?: ComponentStateObject
     connectedCallback?: () => void
     disconnectedCallback?: () => void
+    properties?: PropertiesObject
 }
 
 function registerComponent(name: string, component: CustomElementConstructor) { return customElements.define(name, component) }
@@ -39,12 +42,13 @@ function initialValue(host: any, key: string, state: ComponentState) {
     return state.initialValue
 }
 
-export default function CreateComponent(config: ComponentConfig) {
+export default function CreateComponent(config: ComponentConfig): any {
+    console.log('Create', config)
     const stateKeys = Object.keys(config.state || {})
     const observedAttributes = stateKeys.filter(key => config.state && !!config.state[key].isAttribute)
     const template = getTemplate(config.template, config.style)
 
-    class Component extends HTMLElement {
+    class ComponentClass extends HTMLElement {
         static get observedAttributes() { return observedAttributes }
 
         constructor() {
@@ -112,7 +116,17 @@ export default function CreateComponent(config: ComponentConfig) {
         }
     }
 
-    registerComponent(config.selector, Component)
+    const propertyKeys = Object.keys(config.properties || {})
+    console.log('propertyKeys', propertyKeys)
 
-    return Component
+    if (propertyKeys.length) {
+        propertyKeys.forEach(key => {
+            console.log('define', key, config.properties[key])
+            Object.defineProperty(ComponentClass, key, config.properties[key])
+        })
+    }
+
+    registerComponent(config.selector, ComponentClass)
+
+    return ComponentClass
 }
