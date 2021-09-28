@@ -1,1 +1,0 @@
-{"version":3,"file":"select-all.js","sourceRoot":"","sources":["../../src/dom/select-all.ts"],"names":[],"mappings":"AAAA,OAAO,SAAS,MAAM,0BAA0B,CAAA;AAEhD,MAAM,CAAC,OAAO,UAAU,SAAS,CAAC,QAAgB,EAAE,IAAI,GAAG,QAAQ,CAAC,IAAI;IACpE,OAAO,SAAS,CAAC,IAAI,CAAC,gBAAgB,CAAC,QAAQ,CAAC,CAAC,CAAA;AACrD,CAAC"}

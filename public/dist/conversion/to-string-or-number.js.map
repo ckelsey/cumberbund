@@ -1,0 +1,1 @@
+{"version":3,"file":"to-string-or-number.js","sourceRoot":"","sources":["../../../src/conversion/to-string-or-number.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,UAAU,gBAAgB,CAAC,GAAoB;IACzD,MAAM,SAAS,GAAG,UAAU,CAAC,GAAa,CAAC,CAAA;IAC3C,OAAO,CAAC,KAAK,CAAC,GAAa,CAAC,CAAC,CAAC,CAAE,GAAc,CAAC,IAAI,EAAE,CAAC,CAAC,CAAC,SAAS,CAAA;AACrE,CAAC"}

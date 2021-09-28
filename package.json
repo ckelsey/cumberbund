@@ -2,9 +2,11 @@
   "name": "cumberbund",
   "version": "1.0.0",
   "description": "Web toolbelt",
-  "main": "dist/index.js",
+  "main": "public/dist/index.js",
   "scripts": {
-    "start": "tsc"
+    "start": "tsc -w",
+    "serve": "browser-sync start -s --https --no-ui --serveStatic public",
+    "build-component": "cp node_modules/@webcomponents/custom-elements/src/native-shim.js public/native-shim.js && ts-node -O '{ \"module\": \"commonjs\" }' rollup.config.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,12 @@
   },
   "homepage": "https://github.com/ckelsey/cumberbund#readme",
   "dependencies": {
+    "@webcomponents/custom-elements": "^1.5.0"
+  },
+  "devDependencies": {
+    "rollup": "^2.57.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.4.3"
   }
 }

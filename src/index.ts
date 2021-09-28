@@ -119,3 +119,6 @@ export * from "./types/type"
 
 export * from "./validate/html"
 export * from "./validate/validation-result"
+
+export * from "./dom/web-components/component"
+export * from "./dom/web-components/test-component/test-component"

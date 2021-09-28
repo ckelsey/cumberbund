@@ -7,7 +7,12 @@
         "target": "esnext",
         // produce a source map
         "sourceMap": true,
-        "outDir": "./dist/"
+        "outDir": "./public/dist/",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true
     },
     "files": [
         "src/index.ts"
