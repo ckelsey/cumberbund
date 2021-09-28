@@ -59,7 +59,8 @@ export default function Routing(routes) {
             return result;
         }
     });
-    LinkClickObserver.subscribe((link) => state.next(`${link.path}${link.search || ''}`));
+    const linkClickObserver = LinkClickObserver();
+    linkClickObserver.subscribe((link) => state.next(`${link.path}${link.search || ''}`));
     const popstateObserver = EventObserver(window, 'popstate');
     if (popstateObserver) {
         popstateObserver.subscribe(() => state.next(`${location.pathname}${location.search}`));

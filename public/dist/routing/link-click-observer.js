@@ -65,5 +65,5 @@ function LinkClickObserver() {
     }, () => clickSub(), () => clickSub());
     return observer;
 }
-export default LinkClickObserver();
+export default LinkClickObserver;
 //# sourceMappingURL=link-click-observer.js.map

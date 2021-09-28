@@ -7,12 +7,6 @@ import Diff from '../objects/diff'
 
 const observers = new WeakMap()
 const observerKeys: { [key: string]: string[] } = {}
-
-    ; (window as any).observers = () => ({
-        map: observers,
-        keys: Object.keys(observerKeys)
-    })
-
 const emptyNext = (_value: any, _force?: boolean) => { }
 const emptyError = (_value: any) => { }
 const emptyFn = () => { }

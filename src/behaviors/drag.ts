@@ -210,5 +210,3 @@ export default function Drag({
         return resolve(api)
     })
 }
-
-(window as any).draggables = draggables

@@ -74,4 +74,4 @@ function LinkClickObserver() {
     return observer
 }
 
-export default LinkClickObserver()
+export default LinkClickObserver

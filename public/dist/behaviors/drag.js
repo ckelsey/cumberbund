@@ -126,5 +126,4 @@ export default function Drag({ target, onMove = defaultHandler, onStart = defaul
         return resolve(api);
     });
 }
-window.draggables = draggables;
 //# sourceMappingURL=drag.js.map

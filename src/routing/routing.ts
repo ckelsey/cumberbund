@@ -112,7 +112,8 @@ export default function Routing(routes: { [key: string]: RouteObject }): Routing
         }
     )
 
-    LinkClickObserver.subscribe((link: any) => state.next(`${link.path}${link.search || ''}`))
+    const linkClickObserver = LinkClickObserver()
+    linkClickObserver.subscribe((link: any) => state.next(`${link.path}${link.search || ''}`))
 
     const popstateObserver = EventObserver(window, 'popstate')
 

@@ -6,10 +6,6 @@ import Get from '../objects/get';
 import Diff from '../objects/diff';
 const observers = new WeakMap();
 const observerKeys = {};
-window.observers = () => ({
-    map: observers,
-    keys: Object.keys(observerKeys)
-});
 const emptyNext = (_value, _force) => { };
 const emptyError = (_value) => { };
 const emptyFn = () => { };
