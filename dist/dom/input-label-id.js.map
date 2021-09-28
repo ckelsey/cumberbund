@@ -1,0 +1,1 @@
+{"version":3,"file":"input-label-id.js","sourceRoot":"","sources":["../../src/dom/input-label-id.ts"],"names":[],"mappings":"AAAA,OAAO,YAAY,MAAM,iBAAiB,CAAA;AAE1C,MAAM,CAAC,OAAO,UAAU,YAAY,CAAC,EAAU,EAAE,KAAuB,EAAE,KAAkB;IACxF,YAAY,CAAC,KAAK,EAAE,IAAI,EAAE,EAAE,CAAC,CAAA;IAC7B,YAAY,CAAC,KAAK,EAAE,KAAK,EAAE,EAAE,CAAC,CAAA;AAClC,CAAC"}

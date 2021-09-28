@@ -1,0 +1,22 @@
+{
+  "name": "cumberbund",
+  "version": "1.0.0",
+  "description": "Web toolbelt",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckelsey/cumberbund.git"
+  },
+  "author": "Chris Kelsey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ckelsey/cumberbund/issues"
+  },
+  "homepage": "https://github.com/ckelsey/cumberbund#readme",
+  "dependencies": {
+    "typescript": "^4.4.3"
+  }
+}
