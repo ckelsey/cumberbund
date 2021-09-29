@@ -60,6 +60,9 @@ export default function CreateComponent(config: ComponentConfig): any {
 
             if (propertyKeys.length) {
                 propertyKeys.forEach(key => {
+                    if (typeof config.properties[key].value === 'function') {
+                        config.properties[key].value = config.properties[key].value.bind(this)
+                    }
                     Object.defineProperty(this, key, config.properties[key])
                 })
             }

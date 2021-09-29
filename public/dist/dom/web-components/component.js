@@ -28,6 +28,9 @@ export default function CreateComponent(config) {
             const propertyKeys = Object.keys(config.properties || {});
             if (propertyKeys.length) {
                 propertyKeys.forEach(key => {
+                    if (typeof config.properties[key].value === 'function') {
+                        config.properties[key].value = config.properties[key].value.bind(this);
+                    }
                     Object.defineProperty(this, key, config.properties[key]);
                 });
             }
