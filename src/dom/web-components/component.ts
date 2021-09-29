@@ -59,12 +59,7 @@ export default function CreateComponent(config: ComponentConfig): any {
             const propertyKeys = Object.keys(config.properties || {})
 
             if (propertyKeys.length) {
-                propertyKeys.forEach(key => {
-                    if (typeof config.properties[key].value === 'function') {
-                        config.properties[key].value = config.properties[key].value.bind(this)
-                    }
-                    Object.defineProperty(this, key, config.properties[key])
-                })
+                propertyKeys.forEach((key) => Object.defineProperty(this, key, config.properties[key]))
             }
 
             if (config.state) {
@@ -126,7 +121,7 @@ export default function CreateComponent(config: ComponentConfig): any {
         }
     }
 
-
+    ComponentClass
 
     registerComponent(config.selector, ComponentClass)
 
