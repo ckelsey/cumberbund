@@ -25,6 +25,12 @@ export default function CreateComponent(config) {
             super();
             const clone = document.importNode(template.content, true);
             this.attachShadow({ mode: 'open' }).appendChild(clone);
+            const propertyKeys = Object.keys(config.properties || {});
+            if (propertyKeys.length) {
+                propertyKeys.forEach(key => {
+                    Object.defineProperty(this, key, config.properties[key]);
+                });
+            }
             if (config.state) {
                 this.state = Object.freeze(stateKeys.reduce((result, key) => {
                     if (!config.state) {
@@ -32,7 +38,7 @@ export default function CreateComponent(config) {
                     }
                     return Object.assign(result, {
                         [key]: Observer(initialValue(this, key, config.state[key]), {
-                            matchType: config.state[key].matchType === undefined ? true : config.state[key].matchType,
+                            matchType: config.state[key].matchType,
                             formatter: config.state[key].formatter
                         })
                     });
@@ -57,12 +63,6 @@ export default function CreateComponent(config) {
                     if (typeof config.state[key].onChange === 'function') {
                         this.state[key].subscribe((value, observer) => config.state[key].onChange.apply(this, [value, observer]));
                     }
-                });
-            }
-            const propertyKeys = Object.keys(config.properties || {});
-            if (propertyKeys.length) {
-                propertyKeys.forEach(key => {
-                    Object.defineProperty(this, key, config.properties[key]);
                 });
             }
         }

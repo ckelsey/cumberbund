@@ -4,6 +4,7 @@ import Equals from '../checks/equals';
 import Debounce from '../timing/debounce';
 import Get from '../objects/get';
 import Diff from '../objects/diff';
+const isNullOrUndefined = (value) => value === null || value === undefined;
 const observers = new WeakMap();
 const observerKeys = {};
 const emptyNext = (_value, _force) => { };
@@ -28,6 +29,7 @@ export const nullObserver = () => ({
     unsubscribe: emptyUnsubscribe,
     insert: (_element, _index) => { },
     insertAll: (_elements, _index) => { },
+    updateItemsByKey: (_elements, _key) => { },
     remove: (_element, _index, _all) => { },
     removeElements: (_elements) => { },
     reverse: emptyFn,
@@ -287,6 +289,29 @@ export default function Observer(initialValue, options = {}) {
             }
             valData.value[index] = element;
             return inst.next(valData.value, true);
+        },
+        updateItemsByKey: function (elements, key) {
+            const inst = getInstance();
+            if (!inst || !Array.isArray(elements)) {
+                return;
+            }
+            let elementsToAdd = elements.slice();
+            const newValue = inst.value
+                .slice()
+                .map((element) => {
+                if (isNullOrUndefined(element[key])) {
+                    return element;
+                }
+                const matchingElementIndex = elementsToAdd.findIndex(elementToAdd => !isNullOrUndefined(elementToAdd[key]) && elementToAdd[key] === element[key]);
+                if (matchingElementIndex === -1) {
+                    return element;
+                }
+                const elementToAdd = elementsToAdd[matchingElementIndex];
+                elementsToAdd.splice(matchingElementIndex, 1);
+                return elementToAdd;
+            })
+                .concat(elementsToAdd);
+            return inst.next(newValue, true);
         },
         insertAll: function (elements, index) {
             const inst = getInstance();

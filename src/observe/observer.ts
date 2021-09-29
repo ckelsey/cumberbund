@@ -5,6 +5,7 @@ import Debounce from '../timing/debounce'
 import Get from '../objects/get'
 import Diff from '../objects/diff'
 
+const isNullOrUndefined = (value: any) => value === null || value === undefined
 const observers = new WeakMap()
 const observerKeys: { [key: string]: string[] } = {}
 const emptyNext = (_value: any, _force?: boolean) => { }
@@ -29,6 +30,7 @@ export const nullObserver = (): ObserverInstance => ({
     unsubscribe: emptyUnsubscribe,
     insert: (_element: any, _index?: number) => { },
     insertAll: (_elements: any, _index?: number) => { },
+    updateItemsByKey: (_elements: any[], _key: any) => { },
     remove: (_element: any, _index: any, _all?: boolean) => { },
     removeElements: (_elements: any[]) => { },
     reverse: emptyFn,
@@ -97,6 +99,7 @@ export interface ObserverInstance {
     unsubscribe: typeof emptyUnsubscribe
     insert: (element: any, index?: number) => void
     insertAll: (elements: any, index?: number) => void
+    updateItemsByKey: (_elements: any[], key: any) => void
     remove: (element: any, index: any, all?: boolean) => void
     removeElements: (elements: any[]) => void
     reverse: typeof emptyFn
@@ -399,6 +402,33 @@ export default function Observer(initialValue?: any, options: ObserverOptions = 
             valData.value[index as number] = element
 
             return inst.next(valData.value, true)
+        },
+
+        updateItemsByKey: function (elements: any[], key: any) {
+            const inst = getInstance()
+
+            if (!inst || !Array.isArray(elements)) { return }
+
+            let elementsToAdd = elements.slice()
+
+            const newValue = inst.value
+                .slice()
+                .map((element: any) => {
+                    if (isNullOrUndefined(element[key])) { return element }
+
+                    const matchingElementIndex = elementsToAdd.findIndex(elementToAdd => !isNullOrUndefined(elementToAdd[key]) && elementToAdd[key] === element[key])
+
+                    if (matchingElementIndex === -1) { return element }
+
+                    const elementToAdd = elementsToAdd[matchingElementIndex]
+
+                    elementsToAdd.splice(matchingElementIndex, 1)
+
+                    return elementToAdd
+                })
+                .concat(elementsToAdd)
+
+            return inst.next(newValue, true)
         },
 
         insertAll: function (elements: any[] | { [key: string]: any }, index?: number) {
