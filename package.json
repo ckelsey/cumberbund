@@ -1,6 +1,6 @@
 {
   "name": "cumberbund",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Web toolbelt",
   "main": "public/dist/index.js",
   "scripts": {
