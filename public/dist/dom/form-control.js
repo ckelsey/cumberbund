@@ -1,10 +1,12 @@
-const onSubmit = (input) => () => {
-    if (!input) {
-        return;
-    }
-    if (input.validationMessage) {
-        (this || {}).error = input.validationMessage;
-    }
+const onSubmit = function (input) {
+    return function () {
+        if (!input) {
+            return;
+        }
+        if (input.validationMessage) {
+            (this || {}).error = input.validationMessage;
+        }
+    };
 };
 export default function FormControl(inputid, input, form) {
     if (!form) {

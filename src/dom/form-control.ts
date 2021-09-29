@@ -1,8 +1,9 @@
-const onSubmit = (input: HTMLInputElement) => () => {
-    if (!input) { return }
-    if (input.validationMessage) { (this || {} as any).error = input.validationMessage }
+const onSubmit = function (input: HTMLInputElement) {
+    return function () {
+        if (!input) { return }
+        if (input.validationMessage) { (this || {} as any).error = input.validationMessage }
+    }
 }
-
 export default function FormControl(inputid: string, input: HTMLInputElement, form: HTMLFormElement) {
     if (!form) { return }
 
