@@ -3,7 +3,7 @@ const onSubmit = (input: HTMLInputElement) => () => {
     if (input.validationMessage) { (this || {} as any).error = input.validationMessage }
 }
 
-const FormControl = (inputid: string, input: HTMLInputElement, form: HTMLFormElement) => {
+export default function FormControl(inputid: string, input: HTMLInputElement, form: HTMLFormElement) {
     if (!form) { return }
 
     const onSub = onSubmit(input).bind(this)
@@ -20,5 +20,3 @@ const FormControl = (inputid: string, input: HTMLInputElement, form: HTMLFormEle
         delete form.events[inputid]
     }
 }
-
-export default FormControl

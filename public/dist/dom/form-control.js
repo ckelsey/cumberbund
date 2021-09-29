@@ -6,7 +6,7 @@ const onSubmit = (input) => () => {
         (this || {}).error = input.validationMessage;
     }
 };
-const FormControl = (inputid, input, form) => {
+export default function FormControl(inputid, input, form) {
     if (!form) {
         return;
     }
@@ -22,6 +22,5 @@ const FormControl = (inputid, input, form) => {
         form.removeEventListener('submit', onSub);
         delete form.events[inputid];
     };
-};
-export default FormControl;
+}
 //# sourceMappingURL=form-control.js.map

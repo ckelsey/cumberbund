@@ -1,4 +1,4 @@
-const Debounce = (func, wait = 33, immediate = false) => {
+const Debounce = function (func, wait = 33, immediate = false) {
     let timer = 0;
     const _this = this;
     return function () {
